@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ProjectWin
 {
@@ -21,7 +22,7 @@ namespace ProjectWin
         SqlConnection con;
         public void dbcon()
         {
-            con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""G:\8. EIGHTH SEMESTER\C#\Project\MAIN PROJECT\Game_Mart.mdf"";Integrated Security=True;Connect Timeout=30;Encrypt=False");
+            con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\oop2\database\Game_Mart.mdf;Integrated Security=True;Connect Timeout=30;Encrypt=True");
             con.Open();
         }
 
@@ -95,14 +96,41 @@ namespace ProjectWin
 
         private void button4_Click(object sender, EventArgs e)
         {
+
+
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
             dbcon();
-            SqlCommand sq1 = new SqlCommand("DELETE from PRODUCT_TABLE where id=@id", con);
-            sq1.Parameters.AddWithValue("@id", int.Parse(gameID.Text));
+            SqlCommand sq1 = new SqlCommand("DELETE from PRODUCT_TABLE where GameID=@gameID", con);
+            sq1.Parameters.AddWithValue("@gameID", int.Parse(gameID.Text));
             sq1.ExecuteNonQuery();
             con.Close();
             MessageBox.Show("Product DELETED");
             Form2_Load();
-
         }
+
+        private void updateBtn_Click(object sender, EventArgs e)
+        {
+            if (updateBtn.Text == "Edit")
+            {
+                updateBtn.Text = "Update";
+                gameID.ReadOnly = false;
+                gameDiscount.ReadOnly = false;
+                gameGenre.ReadOnly = false;
+                gameName.ReadOnly = false;
+                gameStock.ReadOnly = false;
+                gamePrice.ReadOnly = false;
+
+            }
+        }
+
+       
     }
 }
